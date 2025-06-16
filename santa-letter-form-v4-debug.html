@@ -113,6 +113,8 @@
         const age = parseInt(form.age.value);
         const templateId = isNaN(age) || age < 5 ? "santa_email_under5" : "santa_email_5plus";
 
+        alert("🚀 About to send form through EmailJS");
+        
         emailjs.sendForm("service_lh5tjal", templateId, form).then(() => {
           console.log("✅ EmailJS send successful");
           alert("Santa received your message!");
