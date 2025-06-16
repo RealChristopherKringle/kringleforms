@@ -75,10 +75,10 @@
   </form>
 
   <div id="confirmation">
-    <h3>🎅 Santa Received Your Letter!</h3>
-    <p>Your message is on its way to the North Pole.</p>
+    <h3>🎅 Your Christmas Wish Letter is Being Delivered!</h3>
+    <p>Your message needs to be securely analyzed before making its way to the North Pole.</p>
     <p style="font-style: italic; color: #555; font-size: 14px;">
-      ✉️ Santa is preparing your reply now. Some inboxes (like AOL) may take a few minutes to receive their message — but it's on the way!
+      ✉️ Santa and his elves are preparing the response now. Some inboxes (like AOL) may take a few minutes to receive their message — but it's on the way!
     </p>
     <button onclick="window.location.reload()" style="margin-top: 20px; padding: 12px 20px; background-color: #388e3c; color: white; font-size: 16px; border: none; border-radius: 6px; cursor: pointer;">
       ✏️ Write Another Letter
@@ -119,18 +119,24 @@
         document.getElementById("elf-line").innerText = `🧝‍♂️ Assigned to Elf #${elfId}`;
 
         emailjs.sendForm("service_lh5tjal", templateId, form).then(() => {
-          form.reset();
-          confirmation.style.display = "block";
-          tracker.style.display = "block";
-          steps.forEach((step, i) => {
-            setTimeout(() => {
-              step.style.opacity = 1;
-              if (i === steps.length - 1 && sparkle) {
-                sparkle.volume = 0.6;
-                sparkle.play().catch(() => {});
-              }
-            }, 800 * (i + 1));
-          });
+  form.reset();
+  confirmation.style.display = "block";
+  tracker.style.display = "block";
+
+  const elfId = Math.floor(Math.random() * 1029) + 1;
+  document.getElementById("elf-line").innerText = `🧝‍♂️ Assigned to Elf #${elfId}`;
+
+  const stepDelays = [1000, 2500, 4000, 6000, 8000];
+  steps.forEach((step, i) => {
+    setTimeout(() => {
+      step.style.opacity = 1;
+      if (i === steps.length - 1 && sparkle) {
+        sparkle.volume = 0.6;
+        sparkle.play().catch(() => {});
+      }
+    }, stepDelays[i]);
+  });
+});
         }).catch((error) => {
           console.error("❌ EmailJS error:", error);
           alert("Something went wrong: " + error.text);
