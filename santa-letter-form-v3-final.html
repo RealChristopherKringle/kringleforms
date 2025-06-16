@@ -75,20 +75,23 @@
   </form>
 
   <div id="confirmation">
-    <h3>🎅 Santa Received Your Letter!</h3>
-    <p>Your message is on its way to the North Pole.</p>
-    <button onclick="window.location.reload()" style="margin-top: 20px; padding: 12px 20px; background-color: #388e3c; color: white; font-size: 16px; border: none; border-radius: 6px; cursor: pointer;">
+  <h3>🎅 Santa Received Your Letter!</h3>
+  <p>Your message is on its way to the North Pole.</p>
+  <p style="font-style: italic; color: #555; font-size: 14px;">
+    ✉️ Santa is preparing your reply now. Some inboxes (like AOL) may take a few minutes to receive their message — but it's on the way!
+  </p>
+  <button onclick="window.location.reload()" style="margin-top: 20px; padding: 12px 20px; background-color: #388e3c; color: white; font-size: 16px; border: none; border-radius: 6px; cursor: pointer;">
     ✏️ Write Another Letter
   </button>
-  </div>
+</div>
 
   <div id="tracker">
-    <h3>📦 Tracking Your Letter</h3>
+    <h3>📦 Tracking Your Letter...</h3>
     <ul id="tracking-steps">
-      <li>🔄 Preparing magical transport...</li>
-      <li>🧤 Scanned by Glove Inspection Team</li>
-      <li>📝 Reviewed by Mrs. Claus</li>
-      <li>🧝‍♂️ Assigned to Elf #728</li>
+      <li>🔄 Preparing decryption analysis for security reasons...</li>
+      <li>🧤 Scanned by North Pole Inspection Team...</li>
+      <li>📝 Reviewed by Mrs. Claus...</li>
+      <li id="elf-line">🧝‍♂️ Assigned to Elf ####</li>
       <li>📬 Delivered to Santa’s desk!</li>
     </ul>
   </div>
@@ -119,15 +122,19 @@
           form.reset();
           confirmation.style.display = "block";
           tracker.style.display = "block";
-          steps.forEach((step, i) => {
-            setTimeout(() => {
-              step.style.opacity = 1;
-              if (i === steps.length - 1 && sparkle) {
-                sparkle.volume = 0.6;
-                sparkle.play().catch(() => {});
-              }
-            }, 800 * (i + 1));
-          });
+            const elfId = Math.floor(Math.random() * 1029) + 1;
+  document.getElementById("elf-line").innerText = `🧝‍♂️ Assigned to Elf #${elfId}`;
+
+  steps.forEach((step, i) => {
+    setTimeout(() => {
+      step.style.opacity = 1;
+      if (i === steps.length - 1 && sparkle) {
+        sparkle.volume = 0.6;
+        sparkle.play().catch(() => {});
+      }
+    }, 800 * (i + 1));
+  });
+});
         }).catch((error) => {
           console.error("❌ EmailJS error:", error);
           alert("Something went wrong: " + error.text);
