@@ -101,48 +101,42 @@
   </audio>
 
   <script>
-    window.addEventListener("load", function () {
-      emailjs.init("P-b54wYCmhmC0sd6R");
+  window.addEventListener("load", function () {
+    emailjs.init("P-b54wYCmhmC0sd6R");
 
-      const form = document.getElementById("santa-form");
-      const confirmation = document.getElementById("confirmation");
-      const tracker = document.getElementById("tracker");
-      const steps = document.querySelectorAll("#tracking-steps li");
-      const sparkle = document.getElementById("sparkle-audio");
+    const form = document.getElementById("santa-form");
+    const confirmation = document.getElementById("confirmation");
+    const tracker = document.getElementById("tracker");
+    const steps = document.querySelectorAll("#tracking-steps li");
+    const sparkle = document.getElementById("sparkle-audio");
 
-      form.addEventListener("submit", function (e) {
-        e.preventDefault();
-        const age = parseInt(form.age.value);
-        const templateId = isNaN(age) || age < 5 ? "template_dqkphwa" : "template_99m33ds";
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      const age = parseInt(form.age.value);
+      const templateId = isNaN(age) || age < 5 ? "template_dqkphwa" : "template_99m33ds";
 
-        const elfId = Math.floor(Math.random() * 1029) + 1;
-        document.getElementById("elf-line").innerText = `🧝‍♂️ Assigned to Elf #${elfId}`;
+      const elfId = Math.floor(Math.random() * 1029) + 1;
+      document.getElementById("elf-line").innerText = `🧝‍♂️ Assigned to Elf #${elfId}`;
 
-        emailjs.sendForm("service_lh5tjal", templateId, form).then(() => {
-  form.reset();
-  confirmation.style.display = "block";
-  tracker.style.display = "block";
+      emailjs.sendForm("service_lh5tjal", templateId, form).then(() => {
+        form.reset();
+        confirmation.style.display = "block";
+        tracker.style.display = "block";
 
-  const elfId = Math.floor(Math.random() * 1029) + 1;
-  document.getElementById("elf-line").innerText = `🧝‍♂️ Assigned to Elf #${elfId}`;
-
-  const stepDelays = [1000, 2500, 4000, 6000, 8000];
-  steps.forEach((step, i) => {
-    setTimeout(() => {
-      step.style.opacity = 1;
-      if (i === steps.length - 1 && sparkle) {
-        sparkle.volume = 0.6;
-        sparkle.play().catch(() => {});
-      }
-    }, stepDelays[i]);
-  });
-});
-        }).catch((error) => {
-          console.error("❌ EmailJS error:", error);
-          alert("Something went wrong: " + error.text);
+        const stepDelays = [1000, 2500, 4000, 6000, 8000];
+        steps.forEach((step, i) => {
+          setTimeout(() => {
+            step.style.opacity = 1;
+            if (i === steps.length - 1 && sparkle) {
+              sparkle.volume = 0.6;
+              sparkle.play().catch(() => {});
+            }
+          }, stepDelays[i]);
         });
+      }).catch((error) => {
+        console.error("❌ EmailJS error:", error);
+        alert("Something went wrong: " + error.text);
       });
     });
-  </script>
-</body>
-</html>
+  });
+</script>
