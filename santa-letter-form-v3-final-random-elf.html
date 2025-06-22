@@ -112,7 +112,13 @@
 
       form.addEventListener("submit", function (e) {
         e.preventDefault();
-        const age = parseInt(form.age.value);
+        let rawAge = form.age.value;
+let age = parseInt(rawAge);
+
+if (isNaN(age)) {
+  // Handle Adult/Parent/Grandparent and other non-numeric age labels
+  age = 99;
+}
         const templateId = getTemplateIdByAge(age);
 
         if (!templateId) {
