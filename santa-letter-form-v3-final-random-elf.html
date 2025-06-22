@@ -76,6 +76,19 @@
     </button>
   </div>
 
+  <div id="progress-container" style="max-width: 600px; margin: 20px auto; padding: 10px;">
+  <p style="text-align: center; font-style: italic; color: #1e88e5; margin-bottom: 8px;">
+    🔐 Encrypting your Christmas wish for secure delivery to Santa...
+  </p>
+  <div style="background-color: #e0f2ff; border: 1px solid #90caf9; border-radius: 20px; overflow: hidden;">
+    <div id="progress-bar" style="width: 0%; height: 18px; background-color: #42a5f5; transition: width 0.5s ease;"></div>
+  </div>
+</div>
+  <div style="background-color: #e0f2ff; border: 1px solid #90caf9; border-radius: 20px; overflow: hidden;">
+    <div id="progress-bar" style="width: 0%; height: 18px; background-color: #42a5f5; transition: width 1.2s ease;"></div>
+  </div>
+</div>
+
   <div id="tracker">
     <h3>📦 Tracking Your Letter</h3>
     <ul id="tracking-steps">
@@ -136,6 +149,17 @@
         form.reset();
         confirmation.style.display = "block";
         tracker.style.display = "block";
+        const progressBar = document.getElementById("progress-bar");
+let width = 0;
+const progressBar = document.getElementById("progress-bar");
+const animateProgress = setInterval(() => {
+  if (width >= 100) {
+    clearInterval(animateProgress);
+  } else {
+    width++;
+    progressBar.style.width = width + "%";
+  }
+}, 150); // 150ms * 100 steps = ~15,000 ms (15 sec total)
 
         const stepDelays = [2000, 4000, 8000, 12000, 15000];
         steps.forEach((step, i) => {
