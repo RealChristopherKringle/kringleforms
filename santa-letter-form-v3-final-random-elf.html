@@ -101,10 +101,33 @@
     const steps = document.querySelectorAll("#tracking-steps li");
     const sparkle = document.getElementById("sparkle-audio");
 
+    function getTemplateIdByAge(age) {
+  if (age === 1) return "template_6pvl7ni";
+  if (age === 2) return "template_r0uvb9b";
+  if (age === 3) return "template_yqr07ah";
+  if (age === 4) return "template_u8wy89a";
+  if (age === 5) return "template_b3xwms9";
+  if (age === 6) return "template_vu5ss5b";
+  if (age === 7) return "template_2i4tiwq";
+  if (age === 8) return "template_i57fhv3";
+  if (age === 9) return "template_1q6jgot";
+  if (age === 10) return "template_bl4975i";
+  if (age === 11) return "template_yxf775l";
+  if (age === 12) return "template_58llfq6";
+  if (age === 13) return "template_t30y52n";
+  if (age >= 14 && age <= 18) return "template_xhbsahm"; // High School
+  if (age > 18 && age <= 120) return "template_34k3otp"; // College/Adult
+  return ""; // Fallback if age is missing or invalid
+}
     form.addEventListener("submit", function (e) {
       e.preventDefault();
       const age = parseInt(form.age.value);
-      const templateId = isNaN(age) || age < 5 ? "template_dqkphwa" : "template_99m33ds";
+      const templateId = getTemplateIdByAge(age);
+
+      if (!templateId) {
+  alert("Oops! Please select a valid age.");
+  return;
+}
 
       const elfId = Math.floor(Math.random() * 1029) + 1;
       document.getElementById("elf-line").innerText = `🧝‍♂️ Assigned to Elf #${elfId}`;
