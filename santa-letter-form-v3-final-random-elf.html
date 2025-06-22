@@ -66,17 +66,17 @@
   </form>
 
   <div id="confirmation">
-    <h3>🎅 Your Christmas Wish Letter is Being Delivered!</h3>
-    <p>Your message needs to be securely analyzed before making its way to the North Pole.</p>
-    <p style="font-style: italic; color: #555; font-size: 14px;">
-      ✉️ Santa and his elves are preparing the response now. Some inboxes (like AOL) may take a few minutes to receive their message — but it's on the way!
-    </p>
-    <button onclick="window.location.reload()" style="margin-top: 20px; padding: 12px 20px; background-color: #388e3c; color: white; font-size: 16px; border: none; border-radius: 6px; cursor: pointer;">
-      ✏️ Write Another Letter
-    </button>
-  </div>
+  <h3>🎅 Your Christmas Wish Letter is Being Delivered!</h3>
+  <p>Your message needs to be securely analyzed before making its way to the North Pole.</p>
+  <p style="font-style: italic; color: #555; font-size: 14px;">
+    ✉️ Santa and his elves are preparing the response now. Some inboxes (like AOL) may take a few minutes to receive their message — but it's on the way!
+  </p>
+  <button onclick="resetForm()" style="margin-top: 20px; padding: 12px 20px; background-color: #388e3c; color: white; font-size: 16px; border: none; border-radius: 6px; cursor: pointer;">
+    ✏️ Write Another Letter
+  </button>
+</div>
 
-  <div id="progress-container" style="max-width: 600px; margin: 20px auto; padding: 10px;">
+<div id="progress-container" style="max-width: 600px; margin: 20px auto; padding: 10px;">
   <p style="text-align: center; font-style: italic; color: #1e88e5; margin-bottom: 8px;">
     🔐 Encrypting your Christmas wish for secure delivery to Santa...
   </p>
@@ -84,9 +84,16 @@
     <div id="progress-bar" style="width: 0%; height: 18px; background-color: #42a5f5; transition: width 0.5s ease;"></div>
   </div>
 </div>
-  <div style="background-color: #e0f2ff; border: 1px solid #90caf9; border-radius: 20px; overflow: hidden;">
-    <div id="progress-bar" style="width: 0%; height: 18px; background-color: #42a5f5; transition: width 1.2s ease;"></div>
-  </div>
+
+<div id="tracker">
+  <h3>📦 Tracking Your Letter</h3>
+  <ul id="tracking-steps">
+    <li>🔄 Preparing decryption services and security transport...</li>
+    <li>🧤 Scanned by North Pole Inspection Team...</li>
+    <li>📝 Reviewed by Mrs. Claus...</li>
+    <li id="elf-line">🧝‍♂️ Assigned to Elf #####...</li>
+    <li>📬 SECURITY EMAIL PROCESS COMPLETE: Delivered to Santa’s desk!</li>
+  </ul>
 </div>
 
   <div id="tracker">
