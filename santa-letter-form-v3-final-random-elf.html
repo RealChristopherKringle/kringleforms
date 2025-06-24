@@ -153,6 +153,16 @@ if (isNaN(age)) {
         document.getElementById("elf-line").innerText = `🧝‍♂️ Assigned to Elf #${elfId}`;
 
         emailjs.sendForm("service_lh5tjal", templateId, form).then(() => {
+  // 👇 Send to Google Sheets
+  fetch("https://script.google.com/macros/s/AKfycbx_MQS1E9TrkISyDShwAO_W_sKGEAAFMTQ-Bk3ghMcJwskXNDDqL9aNGYsLp2YQEtrEEg/exec", {
+    method: "POST",
+    body: new FormData(form)
+  });
+
+  form.reset();
+  confirmation.style.display = "block";
+  tracker.style.display = "block";
+  ...
           form.reset();
           confirmation.style.display = "block";
           tracker.style.display = "block";
