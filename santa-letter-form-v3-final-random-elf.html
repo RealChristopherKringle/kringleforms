@@ -151,6 +151,8 @@ return "";
         e.preventDefault();
         let rawAge = form.age.value;
 let age = parseInt(rawAge);
+        const formData = new FormData(form);
+formData.append("user_language", form.user_language.value);
 
 if (isNaN(age)) {
   // Handle Adult/Parent/Grandparent and other non-numeric age labels
@@ -170,7 +172,7 @@ if (isNaN(age)) {
   // 👇 Send to Google Sheets
   fetch("https://script.google.com/macros/s/AKfycbx_MQS1E9TrkISyDShwAO_W_sKGEAAFMTQ-Bk3ghMcJwskXNDDqL9aNGYsLp2YQEtrEEg/exec", {
   method: "POST",
-  body: new FormData(form)
+  body: formData
 }).then(response => {
   if (response.ok) {
     console.log("✅ Letter successfully logged to Google Sheets");
