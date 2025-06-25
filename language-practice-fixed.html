@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Santa Language Practice</title>
+</head>
+<body>
+  <h2>🎅 Write Your Letter to Santa</h2>
+  <form id="santa-form">
+    <label>Your Name:</label>
+    <input type="text" name="name" required />
+
+    <label>Your Age:</label>
+    <input type="number" name="age" required />
+
+    <label>Your Grade:</label>
+    <input type="text" name="grade" required />
+
+    <label>Your Country:</label>
+    <input type="text" name="country" required />
+
+    <label>Your Language:</label>
+    <select name="language" required>
+      <option value="" disabled selected>Select a language</option>
+      <option value="en">English</option>
+      <option value="es">Español</option>
+      <option value="fr">Français</option>
+      <option value="de">Deutsch</option>
+      <option value="pt">Português</option>
+    </select>
+
+    <label>Your #1 Wish This Year:</label>
+    <input type="text" name="wish" required />
+
+    <label>Your Email:</label>
+    <input type="email" name="email" required />
+
+    <label>Write Your Letter to Santa:</label>
+    <textarea name="message" rows="5" required placeholder="Dear Santa, this year I..."></textarea>
+
+    <button type="submit">🎁 Send My Letter to Santa</button>
+  </form>
+
+  <script>
+    document.getElementById("santa-form").addEventListener("submit", function(e) {
+      e.preventDefault();
+      const form = e.target;
+
+      fetch("https://script.google.com/macros/s/AKfycbx_MQS1E9TrkISyDShwAO_W_sKGEAAFMTQ-Bk3ghMcJwskXNDDqL9aNGYsLp2YQEtrEEg/exec", {
+        method: "POST",
+        body: new FormData(form)
+      }).then(res => {
+        if (res.ok) {
+          console.log("✅ Logged to Google Sheet");
+          form.reset();
+        } else {
+          console.error("❌ Sheet logging failed");
+        }
+      }).catch(err => console.error("❌ Fetch error:", err));
+    });
+  </script>
+</body>
+</html>
