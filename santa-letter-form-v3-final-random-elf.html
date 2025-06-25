@@ -170,8 +170,15 @@ if (isNaN(age)) {
   fetch("https://script.google.com/macros/s/AKfycbx_MQS1E9TrkISyDShwAO_W_sKGEAAFMTQ-Bk3ghMcJwskXNDDqL9aNGYsLp2YQEtrEEg/exec", {
   method: "POST",
   body: new FormData(form)
-}).then(() => {
-  form.reset(); // ✅ Now it only resets *after* data is logged
+}).then(response => {
+  if (response.ok) {
+    console.log("✅ Letter successfully logged to Google Sheets");
+    form.reset(); // Reset only after success
+  } else {
+    console.error("❌ Google Sheets logging failed");
+  }
+}).catch(error => {
+  console.error("❌ Google Sheets fetch error:", error);
 });
     setTimeout(() => form.reset(), 1000);
   confirmation.style.display = "block";
