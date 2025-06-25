@@ -170,9 +170,10 @@ if (isNaN(age)) {
   fetch("https://script.google.com/macros/s/AKfycbx_MQS1E9TrkISyDShwAO_W_sKGEAAFMTQ-Bk3ghMcJwskXNDDqL9aNGYsLp2YQEtrEEg/exec", {
   method: "POST",
   body: new FormData(form)
+}).then(() => {
+  form.reset(); // ✅ Now it only resets *after* data is logged
 });
-
-    form.reset();
+    setTimeout(() => form.reset(), 1000);
   confirmation.style.display = "block";
   tracker.style.display = "block";
   document.getElementById("progress-container").style.display = "block";
