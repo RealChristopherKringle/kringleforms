@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Santa Letter Form - Final Fix</title>
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+</head>
+<body>
+  <form id="santa-form">
+    <label>Name:</label>
+    <input type="text" name="name" required />
+    <label>Age:</label>
+    <input type="number" name="age" required />
+    <label>Grade:</label>
+    <input type="text" name="grade" required />
+    <label>Country:</label>
+    <input type="text" name="country" required />
+    <label>Language:</label>
+    <select name="user_language" required>
+      <option value="" disabled selected>Select Language</option>
+      <option value="en">English</option>
+      <option value="es">Español</option>
+      <option value="fr">Français</option>
+      <option value="de">Deutsch</option>
+      <option value="pt">Português</option>
+    </select>
+    <label>Wish:</label>
+    <input type="text" name="wish" required />
+    <label>Email:</label>
+    <input type="email" name="email" required />
+    <label>Message:</label>
+    <textarea name="message" rows="4" required></textarea>
+    <button type="submit">Send My Letter to Santa</button>
+  </form>
+
+  <script>
+    window.addEventListener("load", function () {
+      emailjs.init("P-b54wYCmhmC0sd6R");
+      const form = document.getElementById("santa-form");
+
+      form.addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        const formData = new FormData(form);
+        formData.append("user_language", form.user_language.value);
+
+        // Send to EmailJS
+        const age = parseInt(form.age.value);
+        const templateId = (age <= 4) ? "template_dqkphwa" : "template_99m33ds";
+        emailjs.sendForm("service_lh5tjal", templateId, form);
+
+        // Send to Google Sheets
+        fetch("https://script.google.com/macros/s/AKfycbx_MQS1E9TrkISyDShwAO_W_sKGEAAFMTQ-Bk3ghMcJwskXNDDqL9aNGYsLp2YQEtrEEg/exec", {
+          method: "POST",
+          body: formData
+        }).then(res => {
+          if (res.ok) {
+            alert("✅ Sent to Santa & logged!");
+            form.reset();
+          } else {
+            alert("❌ Logging failed.");
+          }
+        }).catch(err => alert("❌ Network error: " + err));
+      });
+    });
+  </script>
+</body>
+</html>
