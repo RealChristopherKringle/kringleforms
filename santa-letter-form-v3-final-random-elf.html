@@ -171,13 +171,22 @@ if (isNaN(age)) {
 
         emailjs.sendForm("service_lh5tjal", templateId, form).then(() => {
   // 👇 Send to Google Sheets
-  fetch("https://script.google.com/macros/s/AKfycbx_MQS1E9TrkISyDShwAO_W_sKGEAAFMTQ-Bk3ghMcJwskXNDDqL9aNGYsLp2YQEtrEEg/exec", {
+  const formData = new FormData(form);
+const jsonObject = {};
+formData.forEach((value, key) => {
+  jsonObject[key] = value;
+});
+
+fetch("https://script.google.com/macros/s/AKfycbx_MQS1E9TrkISyDShwAO_W_sKGEAAFMTQ-Bk3ghMcJwskXNDDqL9aNGYsLp2YQEtrEEg/exec", {
   method: "POST",
-  body: formData
+  headers: {
+    "Content-Type": "application/json"
+  },
+  body: JSON.stringify(jsonObject)
 }).then(response => {
   if (response.ok) {
     console.log("✅ Letter successfully logged to Google Sheets");
-    form.reset(); // Reset only after success
+    form.reset(); // ✅ reset only after success
   } else {
     console.error("❌ Google Sheets logging failed");
   }
