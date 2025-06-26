@@ -159,17 +159,14 @@ if (isNaN(age)) {
   // Handle Adult/Parent/Grandparent and other non-numeric age labels
   age = 99;
 }
-        const templateId = getTemplateIdByAge(age);
-
-        if (!templateId) {
-          alert("Oops! Please select a valid age.");
-          return;
-        }
-
         const elfId = Math.floor(Math.random() * 1029) + 1;
-        document.getElementById("elf-line").innerText = `🧝‍♂️ Assigned to Elf #${elfId}`;
+document.getElementById("elf-line").innerText = `🧝‍♂️ Assigned to Elf #${elfId}`;
 
-        emailjs.sendForm("service_lh5tjal", templateId, form).then(() => {
+const language = form.user_language.value;
+
+if (language === "es") {
+  emailjs.sendForm("service_lh5tjal", "template_age_5_Spanish", form).then(() => {
+    
   // 👇 Send to Google Sheets
   const formData = new FormData(form);
 const jsonObject = {};
