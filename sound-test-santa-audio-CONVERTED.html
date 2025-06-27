@@ -1,0 +1,43 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Santa Sound Test (Converted)</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 40px; background: #fffbea; text-align: center; }
+    button {
+      font-size: 18px; padding: 12px 20px; margin: 20px;
+      background-color: #d84315; color: white; border: none;
+      border-radius: 8px; cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <h2>🔊 Santa Sound Test (Converted)</h2>
+  <p>Click each button to test if your browser now plays the <strong>converted</strong> audio files.</p>
+  <button onclick="playChime()">Play Chime 🔔</button>
+  <button onclick="playCheer()">Play Kids Cheering 🎉</button>
+
+  <audio id="chime" preload="auto">
+    <source src="chime_converted.mp3" type="audio/mpeg">
+  </audio>
+
+  <audio id="cheer" preload="auto">
+    <source src="cheer_converted.mp3" type="audio/mpeg">
+  </audio>
+
+  <script>
+    function playChime() {
+      const audio = document.getElementById("chime");
+      audio.currentTime = 0;
+      audio.play().catch(err => console.error("Chime error:", err));
+    }
+    function playCheer() {
+      const audio = document.getElementById("cheer");
+      audio.currentTime = 0;
+      audio.play().catch(err => console.error("Cheer error:", err));
+    }
+  </script>
+</body>
+</html>
