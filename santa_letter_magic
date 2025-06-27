@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Santa Letter Magic Form</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #fffbea;
+      padding: 20px;
+      margin: 0;
+    }
+    #container {
+      max-width: 600px;
+      margin: auto;
+      position: relative;
+    }
+    #santa-form, #confirmation, #tracker, #progress-container {
+      transition: opacity 0.8s ease;
+    }
+    #confirmation, #tracker, #progress-container {
+      display: none;
+      opacity: 0;
+    }
+    #confirmation.show, #tracker.show, #progress-container.show {
+      display: block;
+      opacity: 1;
+    }
+    label {
+      font-weight: bold;
+      margin-top: 10px;
+      display: block;
+    }
+    input, select, textarea {
+      width: 100%;
+      padding: 10px;
+      margin: 6px 0 16px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+    }
+    button {
+      width: 100%;
+      background-color: #d84315;
+      color: white;
+      padding: 14px;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    .snowflake {
+      position: fixed;
+      top: -10px;
+      width: 10px;
+      height: 10px;
+      background: white;
+      border-radius: 50%;
+      opacity: 0.8;
+      animation: fall linear infinite;
+    }
+    @keyframes fall {
+      to {
+        transform: translateY(100vh);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="container">
+    <form id="santa-form">
+      <h2>🎅 Write Your Letter to Santa</h2>
+      <label>Your Name:</label>
+      <input type="text" name="name" required />
+
+      <label>Your Age:</label>
+      <select name="age" required>
+        <option value="" disabled selected>Select Age</option>
+        <option value="999">Adult (23+) / Parent / Grandparent</option>
+        <!-- Real ages -->
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+        <option value="7">7</option>
+        <option value="8">8</option>
+        <option value="9">9</option>
+        <option value="10">10</option>
+        <option value="11">11</option>
+        <option value="12">12</option>
+        <option value="13">13</option>
+        <option value="14">14</option>
+        <option value="15">15</option>
+        <option value="16">16</option>
+        <option value="17">17</option>
+        <option value="18">18</option>
+        <option value="19">19</option>
+        <option value="20">20</option>
+        <option value="21">21</option>
+        <option value="22">22</option>
+      </select>
+
+      <label>Your Email:</label>
+      <input type="email" name="email" required />
+
+      <button type="submit">🎁 Send My Letter to Santa</button>
+    </form>
+
+    <div id="confirmation">
+      <h3>🎄 Santa’s Magic Mailbox</h3>
+      <p>Your message is being securely delivered to the North Pole!</p>
+      <button id="reset-btn">✏️ Write Another Letter</button>
+    </div>
+
+    <div id="progress-container">
+      <p style="text-align: center; font-style: italic; color: #1e88e5; margin-bottom: 8px;">
+        🔐 Encrypting your Christmas wish...
+      </p>
+      <div style="background-color: #e0f2ff; border: 1px solid #90caf9; border-radius: 20px; overflow: hidden;">
+        <div id="progress-bar" style="width: 0%; height: 18px; background-color: #42a5f5;"></div>
+      </div>
+    </div>
+  </div>
+
+  <audio id="sparkle-audio" preload="auto">
+    <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_353ffed97c.mp3?filename=magic-sparkle-1-191444.mp3" type="audio/mpeg">
+  </audio>
+
+  <script>
+    const form = document.getElementById("santa-form");
+    const confirmation = document.getElementById("confirmation");
+    const tracker = document.getElementById("tracker");
+    const progressContainer = document.getElementById("progress-container");
+    const sparkle = document.getElementById("sparkle-audio");
+
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      form.style.opacity = 0;
+      setTimeout(() => {
+        form.style.display = "none";
+        confirmation.classList.add("show");
+        progressContainer.classList.add("show");
+
+        let width = 0;
+        const bar = document.getElementById("progress-bar");
+        const animateProgress = setInterval(() => {
+          if (width >= 100) {
+            clearInterval(animateProgress);
+          } else {
+            width++;
+            bar.style.width = width + "%";
+          }
+        }, 80);
+
+        if (sparkle) {
+          sparkle.volume = 0.6;
+          sparkle.play().catch(() => {});
+        }
+
+        for (let i = 0; i < 30; i++) {
+          let snow = document.createElement("div");
+          snow.className = "snowflake";
+          snow.style.left = Math.random() * 100 + "vw";
+          snow.style.animationDuration = (3 + Math.random() * 5) + "s";
+          document.body.appendChild(snow);
+        }
+      }, 700);
+    });
+
+    document.getElementById("reset-btn").addEventListener("click", function () {
+      confirmation.classList.remove("show");
+      progressContainer.classList.remove("show");
+      form.reset();
+      form.style.display = "block";
+      setTimeout(() => {
+        form.style.opacity = 1;
+      }, 100);
+    });
+  </script>
+</body>
+</html>
