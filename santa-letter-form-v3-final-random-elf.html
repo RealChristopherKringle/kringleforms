@@ -49,16 +49,16 @@
 <input type="text" id="name" name="name" required />
 
 <!-- Gender Selection: Cleaner Horizontal Layout -->
-<div style="display: flex; justify-content: center; gap: 60px; margin: 16px 0;">
-  <label style="display: flex; align-items: center; gap: 8px; font-weight: bold;">
-    <input type="checkbox" name="gender_boy" value="Boy" />
-    🚀 I'm a Boy 🎁⛄
-  </label>
-  <label style="display: flex; align-items: center; gap: 8px; font-weight: bold;">
-    <input type="checkbox" name="gender_girl" value="Girl" />
-    🎀 I'm a Girl 🦌💖
-  </label>
-</div>
+<div class="gender-row">
+      <div class="gender-option" style="justify-content: flex-start;">
+        <input type="checkbox" name="gender_boy" value="Boy" />
+        <div>🚀🎁⛄<br><strong>I'm a Boy</strong></div>
+      </div>
+      <div class="gender-option" style="justify-content: center;">
+        <input type="checkbox" name="gender_girl" value="Girl" />
+        <div>🎀🦌💖<br><strong>I'm a Girl</strong></div>
+      </div>
+    </div>
       
     <label>Your Age:</label>
     <select name="age" required>
