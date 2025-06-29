@@ -49,14 +49,12 @@
 <input type="text" id="name" name="name" required />
 
 <!-- Gender Row: Clean, single-line layout -->
-<div style="display: flex; justify-content: space-between; max-width: 500px; margin: 12px auto;">
-  <label style="display: flex; align-items: center; gap: 6px;">
-    <input type="checkbox" name="gender_boy" value="Boy"> I’m A Boy
-  </label>
-  <label style="display: flex; align-items: center; gap: 6px;">
-    <input type="checkbox" name="gender_girl" value="Girl"> I’m a Girl
-  </label>
-</div>
+<label for="gender">🎄 Are you a...</label>
+<select name="gender" id="gender">
+  <option value="">🎁 Select one (optional)</option>
+  <option value="Boy">🚀🎁⛄ I'm a Boy</option>
+  <option value="Girl">🎀🦌💖 I'm a Girl</option>
+</select>
       
     <label>Your Age:</label>
     <select name="age" required>
