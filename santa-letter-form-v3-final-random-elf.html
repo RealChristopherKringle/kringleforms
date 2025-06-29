@@ -48,15 +48,13 @@
 <label for="name">Your Name:</label>
 <input type="text" id="name" name="name" required />
 
-<!-- Gender Selection -->
-<div style="display: flex; justify-content: center; align-items: center; gap: 40px; margin: 12px 0;">
-  <label style="display: flex; align-items: center; gap: 8px; font-weight: bold;">
-    <input type="checkbox" name="gender_boy" value="Boy" />
-    🎁 I’m a Boy
+<!-- Gender Row: Clean, single-line layout -->
+<div style="display: flex; justify-content: space-between; max-width: 500px; margin: 12px auto;">
+  <label style="display: flex; align-items: center; gap: 6px;">
+    <input type="checkbox" name="gender_boy" value="Boy"> I’m A Boy
   </label>
-  <label style="display: flex; align-items: center; gap: 8px; font-weight: bold;">
-    <input type="checkbox" name="gender_girl" value="Girl" />
-    🎀 I’m a Girl
+  <label style="display: flex; align-items: center; gap: 6px;">
+    <input type="checkbox" name="gender_girl" value="Girl"> I’m a Girl
   </label>
 </div>
       
