@@ -215,7 +215,10 @@
     <li>📬 Cleared Level 7 Security checks with candy-cane signatures...</li>
     <li id="final-step">💾 Delivered securely to Santa’s original Apple IIe Computer via Starlink 🛰️📡!</li>
 <li id="decryption-confirm" style="display: none; font-style: italic; color: #388e3c;">
-  ✅ <strong>Decryption Complete</strong> — 🎄 Santa is reviewing your message...
+  ✅ <strong>Decryption Complete</strong> — 🎅 Santa is reviewing your message...
+</li>
+<li id="signal-confirm" style="display: none; font-style: italic; color: #0288d1;">
+  📡 Signal confirmed — message received by North Pole Command.
 </li>
   </ul>
 </div>
@@ -375,7 +378,16 @@ function decryptText(element) {
           confirmLine.style.transition = "opacity 1s ease-in";
           confirmLine.style.opacity = 1;
         }, 200);
-      }
+        const signalLine = document.getElementById("signal-confirm");
+if (signalLine) {
+  signalLine.style.display = "block";
+  signalLine.style.opacity = 0;
+  setTimeout(() => {
+    signalLine.style.transition = "opacity 1s ease-in";
+    signalLine.style.opacity = 1;
+  }, 1000); // slight delay after the green line
+}
+      
 
       return;
     }
