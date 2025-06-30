@@ -269,27 +269,6 @@
 
       const steps = document.querySelectorAll("#tracking-steps li");
 const delays = [1000, 2000, 3000, 4000, 5000, 6000];
-function decryptText(element) {
-  const original = element.textContent;
-  const chars = '█▒▓◼️🗝️✦$%#@!&*+?<>≡☼';
-  let i = 0;
-
-  const interval = setInterval(() => {
-    if (i >= original.length) {
-      clearInterval(interval);
-      return;
-    }
-
-    let result = '';
-    for (let j = 0; j < original.length; j++) {
-      result += j <= i ? original[j] : chars[Math.floor(Math.random() * chars.length)];
-    }
-
-    element.textContent = result;
-    element.classList.add("revealed");
-    i++;
-  }, 40); // Adjust speed here if needed
-}
 
       for (let i = 0; i < 30; i++) {
         let snow = document.createElement("div");
