@@ -300,14 +300,21 @@ form.addEventListener("submit", function (e) {
     });
 
   for (let i = 0; i < 30; i++) {
-  let snow = document.createElement("div");
+  const snow = document.createElement("div");
   snow.className = "snowflake";
   snow.textContent = "❄️";
   snow.style.left = Math.random() * 100 + "vw";
+  snow.style.top = "-10px";
+  snow.style.position = "fixed";
+  snow.style.zIndex = 9999;
+  snow.style.fontSize = (12 + Math.random() * 16) + "px";
+  snow.style.opacity = 0.9;
+  snow.style.color = "#cceeff";
+  snow.style.pointerEvents = "none";
   snow.style.animationName = "fall, drift, twinkle";
   snow.style.animationDuration = `${6 + Math.random() * 4}s, 6s, 4s`;
-  snow.style.animationIterationCount = "infinite";
   snow.style.animationTimingFunction = "linear";
+  snow.style.animationIterationCount = "infinite";
   document.body.appendChild(snow);
 }
   }, 600);
