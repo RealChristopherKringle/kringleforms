@@ -311,10 +311,13 @@ form.addEventListener("submit", function (e) {
   snow.style.opacity = 0.9;
   snow.style.color = "#cceeff";
   snow.style.pointerEvents = "none";
+
+  // ✅ Force animation properties inline
   snow.style.animationName = "fall, drift, twinkle";
   snow.style.animationDuration = `${6 + Math.random() * 4}s, 6s, 4s`;
-  snow.style.animationTimingFunction = "linear";
   snow.style.animationIterationCount = "infinite";
+  snow.style.animationTimingFunction = "linear";
+
   document.body.appendChild(snow);
 }
   }, 600);
