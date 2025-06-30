@@ -55,7 +55,7 @@
   pointer-events: none;
   z-index: 9999;
   animation-name: fall, drift, twinkle;
-  animation-duration: calc(6s + 4s * random()), 6s, 4s;
+  animation-duration: 6s, 6s, 4s;
   animation-iteration-count: infinite;
   animation-timing-function: linear;
 }
@@ -293,7 +293,7 @@ function decryptText(element) {
         snow.className = "snowflake";
         snow.textContent = "❄️";
         snow.style.left = Math.random() * 100 + "vw";
-        snow.style.animationDuration = (3 + Math.random() * 5) + "s";
+        snow.style.animationDuration = `${6 + Math.random() * 4}s, 6s, 4s`;
         document.body.appendChild(snow);
       }
     }, 600);
