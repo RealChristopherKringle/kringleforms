@@ -305,13 +305,14 @@ form.addEventListener("submit", function (e) {
     });
 
     for (let i = 0; i < 30; i++) {
-      let snow = document.createElement("div");
-      snow.className = "snowflake";
-      snow.textContent = "❄️";
-      snow.style.left = Math.random() * 100 + "vw";
-      snow.style.animationDuration = `${6 + Math.random() * 4}s, 6s, 4s`;
-      document.body.appendChild(snow);
-    }
+  let snow = document.createElement("div");
+  snow.className = "snowflake";
+  snow.textContent = "❄️";
+  snow.style.left = Math.random() * 100 + "vw";
+  snow.style.animationName = "fall, drift, twinkle";
+  snow.style.animationDuration = `${6 + Math.random() * 4}s, 6s, 4s`;
+  document.body.appendChild(snow);
+}
   }, 600);
 
   // Capture form values and build data
