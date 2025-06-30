@@ -1,1 +1,380 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Santa Letter Form - FULL RESTORE v11</title>
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+  <style>
+    body { font-family: Arial, sans-serif; background-color: #fffbea; padding: 20px; }
+    #santa-form, #confirmation, #tracker, #progress-container {
+      max-width: 600px; margin: auto; padding: 25px;
+      border-radius: 12px; transition: opacity 0.8s ease;
+    }
+    #santa-form { background: #ffffff; border: 2px solid #e2b8a1; }
+    label { font-weight: bold; margin-top: 10px; display: block; }
+    input, select, textarea {
+      width: 100%; padding: 10px; margin: 6px 0 16px;
+      border-radius: 6px; border: 1px solid #ccc; box-sizing: border-box;
+    }
+    button {
+      width: 100%; background-color: #d84315; color: white;
+      padding: 14px; border: none; border-radius: 8px;
+      font-size: 16px; cursor: pointer;
+    }
+    #confirmation, #tracker, #progress-container {
+      display: none; opacity: 0;
+    }
+    .show { display: block !important; opacity: 1 !important; }
+    #confirmation { background: #fff3e0; border: 2px dashed #c62828; text-align: center; }
+    #tracker { background: #f3faff; border: 2px solid #90caf9; }
+    #tracking-steps li {
+  opacity: 0.4;
+  transition: opacity 0.6s ease-in;
+  list-style: none;
+  margin-bottom: 8px;
+}
+
+#tracking-steps li.revealed {
+  opacity: 1;
+  text-shadow: 0 0 6px #aad8ff;
+}
+    #tracking-steps li:last-child.revealed {
+  color: #90caf9;
+  font-weight: bold;
+  text-shadow: 0 0 12px #82b1ff;
+  font-style: italic;
+}
+    
+    .snowflake {
+  position: fixed;
+  top: -10px;
+  color: #cceeff;
+  font-size: 18px;
+  opacity: 0.9;
+  pointer-events: none;
+  z-index: 9999;
+  animation-name: fall, drift, twinkle;
+  animation-duration: 6s, 6s, 4s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}
+
+@keyframes fall {
+  to {
+    transform: translateY(110vh);
+    opacity: 0.2;
+  }
+}
+
+@keyframes drift {
+  0% { transform: translateX(0); }
+  50% { transform: translateX(20px); }
+  100% { transform: translateX(0); }
+
+@keyframes twinkle {
+  0%, 100% { transform: rotate(0deg); }
+  50% { transform: rotate(15deg); }
+}
+
+   
+  </style>
+</head>
+<body>
+  <form id="santa-form" method="POST" action="https://script.google.com/macros/s/AKfycbx7dESvTmwMXovPNtsGMvv9hAAqqrRqI5U90U_g5FZTK4oGcQwoExF9WsgP8EDo3mGvaQ/exec">
+    <h2>🎅 Tell Santa's Elves about yourself...</h2>
+    <!-- Your Name -->
+<label for="name">Your Name:</label>
+<input type="text" id="name" name="name" required />
+
+<!-- Gender Row: Clean, single-line layout -->
+<label for="gender">🎄 Are you a...</label>
+<select name="gender" id="gender">
+  <option value="">🎁 Select one (optional)</option>
+  <option value="Boy">❄️⛄ I'm a Boy</option>
+  <option value="Girl">🎀🦌 I'm a Girl</option>
+</select>
+      
+    <label>Your Age:</label>
+    <select name="age" required>
+      <option value="" disabled selected>Select Age</option>
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+      <option value="4">4</option>
+      <option value="5">5</option>
+      <option value="6">6</option>
+      <option value="7">7</option>
+      <option value="8">8</option>
+      <option value="9">9</option>
+      <option value="10">10</option>
+      <option value="11">11</option>
+      <option value="12">12</option>
+      <option value="13">13</option>
+      <option value="14">14</option>
+      <option value="15">15</option>
+      <option value="16">16</option>
+      <option value="17">17</option>
+      <option value="18">18</option>
+      <option value="19">19</option>
+      <option value="20">20</option>
+      <option value="21">21</option>
+      <option value="22">22</option>
+      <option value="999">Adult (23+) / Parent / Grandparent</option>
+    </select>
+
+    <label>Your Grade:</label>
+    <select name="grade" required>
+      <option value="">Select Grade</option>
+      <option>Preschool</option><option>Kindergarten</option><option>1st Grade</option>
+      <option>2nd Grade</option><option>3rd Grade</option><option>4th Grade</option>
+      <option>5th Grade</option><option>6th Grade</option><option>7th Grade</option>
+      <option>8th Grade</option><option>High School</option><option>College</option>
+    </select>
+
+    <label for="country">Your Country:</label>
+<select name="country" id="country" required>
+  <option value="" disabled selected>Select your country:</option>
+  <option value="united states">🇺🇸 United States</option>
+  <option value="canada">🇨🇦 Canada</option>
+  <option value="mexico">🇲🇽 Mexico</option>
+  <option value="latin america">🌎 Latin America (Central & South)</option>
+  <option value="united kingdom">🇬🇧 United Kingdom</option>
+  <option value="france">🇫🇷 France</option>
+  <option value="germany">🇩🇪 Germany</option>
+  <option value="spain">🇪🇸 Spain</option>
+  <option value="italy">🇮🇹 Italy</option>
+  <option value="brazil">🇧🇷 Brazil</option>
+  <option value="india">🇮🇳 India</option>
+  <option value="japan">🇯🇵 Japan</option>
+  <option value="china">🇨🇳 China</option>
+  <option value="south korea">🇰🇷 South Korea</option>
+  <option value="russia">🇷🇺 Russia</option>
+  <option value="philippines">🇵🇭 Philippines</option>
+  <option value="australia">🇦🇺 Australia</option>
+  <option value="africa">🌍 Africa (continent)</option>
+  <option value="asia">🌏 Asia (continent)</option>
+  <option value="middle east">🕌 Middle East (region)</option>
+</select>
+  <!-- Add more as needed -->
+
+    <label>Your Language:</label>
+<select name="user_language" required>
+  <option value="" disabled selected>🌐 Select a language</option>
+  <option value="en">🇺🇸 English</option>
+  <option value="zh">🇨🇳 中文 (Chinese)</option>
+  <option value="hi">🇮🇳 हिंदी (Hindi)</option>
+  <option value="es">🇲🇽 Español (Spanish)</option>
+  <option value="fr">🇫🇷 Français (French)</option>
+  <option value="ar">🇸🇦 العربية (Arabic)</option>
+  <option value="bn">🇧🇩 বাংলা (Bengali)</option>
+  <option value="pt">🇧🇷 Português (Portuguese)</option>
+  <option value="ru">🇷🇺 Русский (Russian)</option>
+  <option value="de">🇩🇪 Deutsch (German)</option>
+</select>
+
+    <label>Your #1 Wish This Year:</label>
+    <textarea name="wish" required></textarea>
+    <label>Your Email:</label>
+    <input type="email" name="email" required />
+
+    <label>Write Your Personal Letter to Santa: (And don't forget to tell him what nice things you did this year!)</label>
+    <textarea name="message" rows="8" placeholder="Dear Santa, this year I..."></textarea>
+
+    <button type="submit">🎁 Send My Letter to Santa</button>
+  </form>
+
+  <div id="confirmation">
+    <h3>🎄 Santa’s Magic Mailbox</h3>
+    <p>Your message is being delivered to the North Pole! Security measures must be taken to keep the Elves safe!</p>
+    <button id="reset-btn">✏️ Write Another Letter</button>
+  </div>
+
+  <div id="progress-container">
+  <p style="text-align: center; font-style: italic; color: #1e88e5;">
+    🔐 Encrypting your Christmas wish across global VPNs laced with stardust... Please be patient — some older servers (like AOL) run on sugar cookies.
+  </p>
+  <div style="background-color: #e0f2ff; border: 1px solid #90caf9; border-radius: 20px; overflow: hidden;">
+    <div id="progress-bar" style="width: 0%; height: 18px; background-color: #42a5f5;"></div>
+  </div>
+</div>
+
+<div id="tracker">
+  <h3>📦 Tracking Your Letter</h3>
+  <ul id="tracking-steps">
+    <li>🔒 Activating quantum-level decryption using enchanted coding protocols...</li>
+    <li>🧤 Scanned by North Pole RAID Grid for Confrater interference...</li>
+    <li>🖥 Translated from JavaScript to DOS by Mrs. Claus herself (she insists)...</li>
+    <li id="elf-line">🎯 Assigned to Elf #### via SleighNet Dispatch Protocol...</li>
+    <li>📬 Cleared Level 7 Security checks with candy-cane signatures...</li>
+    <li id="final-step">💾 Delivered securely to Santa’s original Apple IIe Computer via Starlink 🛰️📡!</li>
+<li id="decryption-confirm" style="display: none; font-style: italic; color: #388e3c;">
+  ✅ <strong>Decryption Complete</strong> — 🎅 Santa is reviewing your message...
+</li>
+<li id="signal-confirm" style="display: none; font-style: italic; color: #0288d1;">
+  📡 Signal confirmed — message received by North Pole Command.
+</li>
+  </ul>
+</div>
+  
+  <audio id="sparkle-audio" preload="auto">
+    <source src="chime_converted.mp3" type="audio/mpeg">
+  </audio>
+  <audio id="cheer-audio" preload="auto">
+    <source src="cheer_converted.mp3" type="audio/mpeg">
+  </audio>
+
+  <script>
+  const form = document.getElementById("santa-form");
+  const confirmation = document.getElementById("confirmation");
+  const tracker = document.getElementById("tracker");
+  const progress = document.getElementById("progress-container");
+  const sparkle = document.getElementById("sparkle-audio");
+  const cheer = document.getElementById("cheer-audio");
+
+  window.addEventListener("load", function () {
+    emailjs.init("P-b54wYCmhmC0sd6R");
+  });
+
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    if (sparkle) {
+      sparkle.currentTime = 0;
+      sparkle.play().catch(() => {});
+    }
+
+    form.style.opacity = 0;
+    const elfId = Math.floor(Math.random() * 1029) + 1;
+    document.getElementById("elf-line").innerText = `🧝‍♂️ Assigned to Elf #${elfId}`;
+
+    setTimeout(() => {
+      form.style.display = "none";
+      confirmation.classList.add("show");
+      progress.classList.add("show");
+      tracker.classList.add("show");
+
+      let width = 0;
+      const progressBar = document.getElementById("progress-bar");
+      const animateProgress = setInterval(() => {
+        if (width >= 100) clearInterval(animateProgress);
+        else progressBar.style.width = (++width) + "%";
+      }, 120);
+
+      const steps = document.querySelectorAll("#tracking-steps li");
+const delays = [1000, 2000, 3000, 4000, 5000, 6000];
+
+      for (let i = 0; i < 30; i++) {
+        let snow = document.createElement("div");
+        snow.className = "snowflake";
+        snow.textContent = "❄️";
+        snow.style.left = Math.random() * 100 + "vw";
+        snow.style.animationDuration = `${6 + Math.random() * 4}s, 6s, 4s`;
+        document.body.appendChild(snow);
+      }
+    }, 600);
+
+    // Capture form values and build data
+    const formData = new FormData(form);
+    const country = form.country.value;
+    let countryPhrase = country;
+    const countriesWithThe = [
+      "United States", "United Kingdom", "Philippines",
+      "Netherlands", "Czech Republic", "Dominican Republic", "United Arab Emirates"
+    ];
+    if (countriesWithThe.includes(country)) {
+      countryPhrase = "the " + country;
+    }
+    formData.append("country_phrase", countryPhrase);
+
+    // Send to EmailJS
+    const age = parseInt(form.age.value);
+    const language = form.user_language.value;
+
+    let templateId;
+    if (language === "es") templateId = "template_age_5_Spanish";
+    else if (language === "fr") templateId = "template_age_5_French";
+    else if (language === "de") templateId = "template_age_5_German";
+    else if (language === "pt") templateId = "template_age_5_Portuguese";
+    else {
+      // Default English age-based fallback
+      const ageTemplateMap = {
+        1: "template_6pvl7ni", 2: "template_r0uvb9b", 3: "template_yqr07ah",
+        4: "template_u8wy89a", 5: "template_b3xwms9", 6: "template_vu5ss5b",
+        7: "template_2i4tiwq", 8: "template_i57fhv3", 9: "template_1q6jgot",
+        10: "template_bl4975i", 11: "template_yxf775l", 12: "template_58llfq6",
+        13: "template_t30y52n"
+      };
+      if (ageTemplateMap[age]) templateId = ageTemplateMap[age];
+      else if (age >= 14 && age <= 18) templateId = "template_xhbsahm"; // High school
+      else if (age >= 19 && age <= 22) templateId = "template_34k3otp"; // College
+      else templateId = "template_f4munhy"; // Adult/Parent/Grandparent
+    }
+
+    emailjs.sendForm("service_lh5tjal", templateId, form).then(() => {
+      console.log("✅ Email sent via EmailJS");
+    }).catch((error) => {
+      console.error("❌ EmailJS error:", error);
+    });
+
+    // Send to Google Sheets
+    fetch("https://script.google.com/macros/s/AKfycbx7dESvTmwMXovPNtsGMvv9hAAqqrRqI5U90U_g5FZTK4oGcQwoExF9WsgP8EDo3mGvaQ/exec", {
+      method: "POST",
+      body: formData
+    });
+  });
+// ✅ Decryption Complete
+  document.getElementById("reset-btn").addEventListener("click", function () {
+    confirmation.classList.remove("show");
+    tracker.classList.remove("show");
+    progress.classList.remove("show");
+    form.reset();
+    form.style.display = "block";
+    if (cheer) { cheer.currentTime = 0; cheer.play().catch(() => {}); }
+    setTimeout(() => { form.style.opacity = 1; }, 100);
+  });
+    function decryptText(element) {
+  const original = element.textContent;
+  const chars = '█▒▓◼️🗝️✦$%#@!&*+?<>≡☼';
+  let i = 0;
+
+  const interval = setInterval(() => {
+    if (i >= original.length) {
+      clearInterval(interval);
+
+      // ✅ Show confirmation line
+      const confirmLine = document.getElementById("decryption-confirm");
+      if (confirmLine) {
+        confirmLine.style.display = "block";
+        confirmLine.style.opacity = 0;
+        setTimeout(() => {
+          confirmLine.style.transition = "opacity 1s ease-in";
+          confirmLine.style.opacity = 1;
+        }, 200);
+        const signalLine = document.getElementById("signal-confirm");
+if (signalLine) {
+  signalLine.style.display = "block";
+  signalLine.style.opacity = 0;
+  setTimeout(() => {
+    signalLine.style.transition = "opacity 1s ease-in";
+    signalLine.style.opacity = 1;
+  }, 1000); // slight delay after the green line
+}
+      
+
+      return;
+    }
+
+    let result = '';
+    for (let j = 0; j < original.length; j++) {
+      result += j <= i ? original[j] : chars[Math.floor(Math.random() * chars.length)];
+    }
+
+    element.textContent = result;
+    element.classList.add("revealed");
+    i++;
+  }, 40);
+}
+</script>
+</body>
+</html>
