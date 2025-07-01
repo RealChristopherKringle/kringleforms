@@ -419,5 +419,28 @@ function decryptText(element) {
   }, 180); // ← THIS is the speed control line!
 }
 </script>
+    <script>
+window.addEventListener("load", function () {
+  for (let i = 0; i < 30; i++) {
+    const snow = document.createElement("div");
+    snow.className = "snowflake";
+    snow.textContent = "❄️";
+    snow.style.left = Math.random() * 100 + "vw";
+    snow.style.top = "-10px";
+    const offset = Math.random() * -50;
+snow.style.transform = `translateY(${offset}px)`; // vertical offset
+    snow.style.position = "fixed";
+    snow.style.zIndex = 9999;
+    snow.style.fontSize = (12 + Math.random() * 16) + "px";
+    snow.style.opacity = 0.9;
+    snow.style.color = "#cceeff";
+    snow.style.pointerEvents = "none";
+    snow.style.animation = `fall ${6 + Math.random() * 4}s linear infinite, drift 6s linear infinite, twinkle 4s linear infinite`;
+    document.body.appendChild(snow);
+  }
+});
+</script>
+</body>
+</html>
 </body>
 </html>
