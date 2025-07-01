@@ -80,6 +80,7 @@
     .snowflake {
       position: fixed;
       top: -10px;
+      transform: translateY(0); /* ✅ Add this line for snowflake to fall */
       color: #cceeff;
       font-size: 18px;
       opacity: 0.9;
@@ -305,6 +306,7 @@ form.addEventListener("submit", function (e) {
   snow.textContent = "❄️";
   snow.style.left = Math.random() * 100 + "vw";
   snow.style.top = "-10px";
+  snow.style.transform = `translateY(${Math.random() * -50}px)`; // ✅ vertical offset
   snow.style.position = "fixed";
   snow.style.zIndex = 9999;
   snow.style.fontSize = (12 + Math.random() * 16) + "px";
