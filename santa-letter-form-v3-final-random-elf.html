@@ -97,7 +97,7 @@
     </select>
 
     <label>Your Age:</label>
-    <select name="age" required>
+    <select name="user_age" required>
       <option value="" disabled selected>🎂 Select Age</option>
       <option value="1">1</option>
       <option value="2">2</option>
@@ -247,7 +247,10 @@ form.addEventListener("submit", function (e) {
   form.style.opacity = 0;
   const elfId = Math.floor(Math.random() * 1029) + 1;
   document.getElementById("elf-line").innerText = `🧝‍♂️ Assigned to Elf #${elfId} via SleighNet Dispatch Protocol...`;
-
+// Create form data
+const formData = new FormData(form);
+  formData.append("random_elf", "Elf #" + elfId);
+  
   setTimeout(() => {
     form.style.display = "none";
     confirmation.classList.add("show");
@@ -284,7 +287,7 @@ form.addEventListener("submit", function (e) {
   }
   formData.append("country_phrase", countryPhrase);
 
-  const age = parseInt(form.age.value);
+  const age = parseInt(form.user_age.value);
   const language = form.user_language.value;
 
   let templateId;
