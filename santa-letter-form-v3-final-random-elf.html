@@ -280,6 +280,23 @@ form.addEventListener("submit", function (e) {
     confirmation.classList.add("show");
     progress.classList.add("show");
     tracker.classList.add("show");
+        for (let i = 0; i < 30; i++) { // ❄️ Snowflakes start here
+      const snow = document.createElement("div");
+      snow.className = "snowflake";
+      snow.textContent = "❄️";
+      snow.style.left = Math.random() * 100 + "vw";
+      snow.style.top = "-10px";
+      const offset = Math.random() * -50;
+      snow.style.transform = "translateY(" + offset + "px)";
+      snow.style.position = "fixed";
+      snow.style.zIndex = 9999;
+      snow.style.fontSize = (12 + Math.random() * 16) + "px";
+      snow.style.opacity = 0.9;
+      snow.style.color = "#cceeff";
+      snow.style.pointerEvents = "none";
+      snow.style.animation = "fall 8s linear infinite, drift 6s linear infinite, twinkle 4s linear infinite";
+      document.body.appendChild(snow);
+    }
 
     let width = 0;
     const progressBar = document.getElementById("progress-bar");
