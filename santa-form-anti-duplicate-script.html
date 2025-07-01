@@ -1,0 +1,134 @@
+<script>
+const form = document.getElementById("santa-form");
+const confirmation = document.getElementById("confirmation");
+const tracker = document.getElementById("tracker");
+const progress = document.getElementById("progress-container");
+const sparkle = document.getElementById("sparkle-audio");
+const cheer = document.getElementById("cheer-audio");
+let isSubmitting = false; // prevent double-submission
+
+window.addEventListener("load", function () {
+  emailjs.init("P-b54wYCmhmC0sd6R");
+});
+
+form.addEventListener("submit", function (e) {
+  e.preventDefault();
+  if (isSubmitting) return;
+  isSubmitting = true;
+
+  document.querySelector("button[type='submit']").disabled = true;
+
+  if (sparkle) {
+    sparkle.currentTime = 0;
+    sparkle.play().catch(() => {});
+  }
+
+  form.style.opacity = 0;
+  const elfId = Math.floor(Math.random() * 1029) + 1;
+  document.getElementById("elf-line").innerText = `🧝‍♂️ Assigned to Elf #${elfId} via SleighNet Dispatch Protocol...`;
+
+  setTimeout(() => {
+    form.style.display = "none";
+    confirmation.classList.add("show");
+    progress.classList.add("show");
+    tracker.classList.add("show");
+
+    const progressBar = document.getElementById("progress-bar");
+    let width = 0;
+    const animateProgress = setInterval(() => {
+      if (width >= 100) clearInterval(animateProgress);
+      else progressBar.style.width = (++width) + "%";
+    }, 120);
+
+    const steps = document.querySelectorAll("#tracking-steps li");
+    const delays = [1000, 2000, 3000, 4000, 5000, 6000];
+    steps.forEach((step, i) => {
+      setTimeout(() => {
+        if (i === steps.length - 1) {
+          decryptText(step);
+        } else {
+          step.classList.add("revealed");
+        }
+      }, delays[i]);
+    });
+
+    const formData = new FormData(form);
+    const country = form.user_country.value;
+    let countryPhrase = country;
+    const countriesWithThe = ["United States", "United Kingdom", "Philippines", "Netherlands", "Czech Republic", "Dominican Republic", "United Arab Emirates"];
+    if (countriesWithThe.includes(country)) {
+      countryPhrase = "the " + country;
+    }
+    formData.append("country_phrase", countryPhrase);
+    formData.append("random_elf", "Elf #" + elfId);
+
+    const age = parseInt(form.user_age.value);
+    const language = form.user_language.value;
+
+    let templateId;
+    const ageTemplateMap = {
+      1: "template_6pvl7ni", 2: "template_r0uvb9b", 3: "template_yqr07ah",
+      4: "template_u8wy89a", 5: "template_b3xwms9", 6: "template_vu5ss5b",
+      7: "template_2i4tiwq", 8: "template_i57fhv3", 9: "template_1q6jgot",
+      10: "template_bl4975i", 11: "template_yxf775l", 12: "template_58llfq6",
+      13: "template_t30y52n"
+    };
+
+    if (language === "es") templateId = "template_age_5_Spanish";
+    else if (language === "fr") templateId = "template_age_5_French";
+    else if (language === "de") templateId = "template_age_5_German";
+    else if (language === "pt") templateId = "template_age_5_Portuguese";
+    else if (ageTemplateMap[age]) templateId = ageTemplateMap[age];
+    else if (age >= 14 && age <= 18) templateId = "template_xhbsahm";
+    else if (age >= 19 && age <= 22) templateId = "template_34k3otp";
+    else templateId = "template_f4munhy";
+
+    Promise.all([
+      emailjs.sendForm("service_lh5tjal", templateId, form),
+      fetch("https://script.google.com/macros/s/AKfycbx7dESvTmwMXovPNtsGMvv9hAAqqrRqI5U90U_g5FZTK4oGcQwoExF9WsgP8EDo3mGvaQ/exec", {
+        method: "POST",
+        body: formData
+      })
+    ]).then(() => {
+      console.log("✅ Email and Google Sheet updated");
+    }).catch((err) => {
+      console.error("❌ Submission error:", err);
+    });
+
+  }, 1000);
+});
+
+document.getElementById("reset-btn").addEventListener("click", function () {
+  confirmation.classList.remove("show");
+  tracker.classList.remove("show");
+  progress.classList.remove("show");
+  form.reset();
+  form.style.display = "block";
+  document.querySelector("button[type='submit']").disabled = false;
+  isSubmitting = false;
+  if (cheer) {
+    cheer.currentTime = 0;
+    cheer.play().catch(() => {});
+  }
+  setTimeout(() => { form.style.opacity = 1; }, 100);
+});
+
+function decryptText(element) {
+  const original = element.textContent;
+  const chars = '█▒▓◼️🗝️✦$%#@!&*+?<>≡☼';
+  let i = 0;
+  const interval = setInterval(() => {
+    if (i >= original.length) {
+      clearInterval(interval);
+      return;
+    }
+    let result = '';
+    for (let j = 0; j < original.length; j++) {
+      result += j <= i ? original[j] : chars[Math.floor(Math.random() * chars.length)];
+    }
+    element.textContent = result;
+    element.classList.add("revealed");
+    i++;
+  }, 180);
+}
+</script>
