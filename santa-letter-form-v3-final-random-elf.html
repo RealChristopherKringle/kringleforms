@@ -313,10 +313,7 @@ form.addEventListener("submit", function (e) {
   snow.style.pointerEvents = "none";
 
   // ✅ Force animation properties inline
-  snow.style.animationName = "fall, drift, twinkle";
-  snow.style.animationDuration = `${6 + Math.random() * 4}s, 6s, 4s`;
-  snow.style.animationIterationCount = "infinite";
-  snow.style.animationTimingFunction = "linear";
+  snow.style.animation = `fall ${6 + Math.random() * 4}s linear infinite, drift 6s linear infinite, twinkle 4s linear infinite`;
 
   document.body.appendChild(snow);
 }
