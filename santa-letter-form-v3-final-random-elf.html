@@ -191,6 +191,23 @@
 <input type="hidden" name="ip_address" id="ip_address" />
 <input type="hidden" name="location_city" id="location_city" />
 <input type="hidden" name="location_country" id="location_country" />
+
+<script>
+  // Auto-fill IP and Location info from ipapi.co
+  window.addEventListener("DOMContentLoaded", () => {
+    fetch("https://ipapi.co/json")
+      .then(response => response.json())
+      .then(data => {
+        document.getElementById("ip_address").value = data.ip || "";
+        document.getElementById("location_city").value = data.city || "";
+        document.getElementById("location_country").value = data.country_name || "";
+        console.log("📍 IP and location filled:", data);
+      })
+      .catch(error => {
+        console.warn("🌐 IP lookup failed:", error);
+      });
+  });
+</script>
   </form>
 
   <div id="confirmation">
