@@ -386,21 +386,24 @@ function decryptText(element) {
 }
 </script>
 
-  </form>
-    
 <script>
   // Auto-fill IP and Location info from ipapi.co
-  fetch("https://ipapi.co/json")
-    .then(response => response.json())
-    .then(data => {
-      document.getElementById("ip_address").value = data.ip || "";
-      document.getElementById("location_city").value = data.city || "";
-      document.getElementById("location_country").value = data.country_name || "";
-    })
-    .catch(error => {
-      console.warn("🌐 IP lookup failed:", error);
-    });
+  window.addEventListener("DOMContentLoaded", () => {
+    fetch("https://ipapi.co/json")
+      .then(response => response.json())
+      .then(data => {
+        document.getElementById("ip_address").value = data.ip || "";
+        document.getElementById("location_city").value = data.city || "";
+        document.getElementById("location_country").value = data.country_name || "";
+        console.log("📍 IP and location filled:", data);
+      })
+      .catch(error => {
+        console.warn("🌐 IP lookup failed:", error);
+      });
+  });
 </script>
+
+  </form>
     
 </body>
 </html>
