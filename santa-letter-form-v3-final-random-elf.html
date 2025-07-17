@@ -387,19 +387,26 @@ function decryptText(element) {
 </script>
 
 <script>
-  // Auto-fill IP and Location info from ipapi.co
-  window.addEventListener("DOMContentLoaded", () => {
-    fetch("https://ipapi.co/json")
-      .then(response => response.json())
-      .then(data => {
-        document.getElementById("ip_address").value = data.ip || "";
-        document.getElementById("location_city").value = data.city || "";
-        document.getElementById("location_country").value = data.country_name || "";
-        console.log("📍 IP and location filled:", data);
-      })
-      .catch(error => {
-        console.warn("🌐 IP lookup failed:", error);
-      });
+  const form = document.getElementById("santa-form");
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    try {
+      const response = await fetch("https://ipapi.co/json");
+      const data = await response.json();
+
+      document.getElementById("ip_address").value = data.ip || "";
+      document.getElementById("location_city").value = data.city || "";
+      document.getElementById("location_country").value = data.country_name || "";
+
+      console.log("📍 IP and location filled before submit:", data);
+    } catch (error) {
+      console.warn("🌐 IP lookup failed:", error);
+    }
+
+    // Now submit the form after filling hidden fields
+    form.submit();
   });
 </script>
 
