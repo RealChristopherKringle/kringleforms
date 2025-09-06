@@ -177,8 +177,14 @@
     <!-- Add more as needed -->
 </select>
 
-    <label>✨ Your #1 Wish This Year:</label>
-    <textarea name="user_wish" required></textarea>
+    <label>🎁 What’s your #1 wish this year? (Only one item!)</label>
+<input 
+  type="text" 
+  name="user_wish" 
+  maxlength="60" 
+  placeholder="Example: A red bike, a teddy bear, a magic kit..." 
+  required 
+/>
 
     <label>📧 Your Email:</label>
     <input type="email" name="email" required />
