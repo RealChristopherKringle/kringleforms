@@ -417,6 +417,8 @@ const capitalizedName = name
   .split(" ")
   .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
   .join(" ");
+
+// Update the input field directly for EmailJS compatibility
 form.user_name.value = capitalizedName;
     
     // Now submit the form after filling hidden fields
